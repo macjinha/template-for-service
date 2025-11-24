@@ -38,7 +38,16 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background: var(--color-back);
+    background-color: var(--color-back);
+    background-image:
+        /* верх прозрачный, низ плавно уходит в основной фон */
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(31, 31, 31) 100%),
+        /* мягкое общее затемнение */
+        linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(80, 80, 80, 0.5) 100%),
+        url('bc1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +60,7 @@ body {
     z-index: 0;
 
     background: linear-gradient(
-        90deg,
+        180deg,
         var(--color-gradient-1),
         var(--color-gradient-2),
         var(--color-gradient-3),
@@ -59,8 +68,8 @@ body {
         var(--color-gradient-1)
     );
 
-    background-size: 100% 100%;
-    animation: flow 20s linear infinite;
+    background-size: 200% 100%;
+    animation: flow 60s linear infinite;
 }
 
 
@@ -85,6 +94,27 @@ body {
     mix-blend-mode: screen;
     opacity: 0.8;
 }
+
+
+.sparkle {
+    position: absolute;
+    z-index: 2;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    animation: sparkle 4s ease-in-out infinite;
+    filter: blur(2px);
+}
+
+@keyframes sparkle {
+    0%   { transform: translateY(0) scale(0.5); opacity: 0.0; }
+    20%  { opacity: 0.3; }
+    50%  { transform: translateY(-20px) scale(1); opacity: 0.15; }
+    80%  { opacity: 0.0; }
+    100% { transform: translateY(0) scale(0.5); }
+}
+
 
 .hero > * {
     position: relative;
@@ -288,8 +318,9 @@ a:hover { color: var(--color-accent-2); }
 }
 
 footer {
-    background: var(--color-back2);
+    background: var(--color-background0);
     color: white;
+    padding: 30px 20px;
 }
 
 .footer-container {
@@ -301,13 +332,13 @@ footer {
     gap: 12px;
     text-align: center;
 }
-/*
+
 .footer-left,
 .footer-center,
 .footer-right {
     padding: 10px;
 }
-*/
+
 .footer-left,
 .footer-center,
 .footer-right {
@@ -326,7 +357,7 @@ footer {
 .footer-center a,
 .footer-right a {
     display: block;
-    color: var(--color-gradient-4);
+    color: var(--color-accent);
     text-decoration: none;
     margin-top: 5px;
     transition: color 0.3s ease;
@@ -347,7 +378,7 @@ footer {
 
     .footer-container {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
     }
 
     .footer-center,
